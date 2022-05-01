@@ -1,4 +1,5 @@
 pytest
+pytest_bdd
 azure-mgmt-resource
 azure-mgmt-datafactory
 azure-identity
