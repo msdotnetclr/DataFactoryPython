@@ -23,11 +23,10 @@ def print_activity_run_details(activity_run):
         print("\tErrors: {}".format(activity_run.error['message']))
 
 
-def main(client_id: str, client_secret: str, tenant_id: str):
-    subscription_id = "75bbe148-d5d2-41dc-bd2e-5e14b96363b4"
+def main(tenant_id: str, subscription_id: str, client_id: str, client_secret: str):
     rg_name = "RG_Research"
     df_name = "DSTORM-ADF01"
-    credentials = ClientSecretCredential(client_id, client_secret, tenant_id)
+    credentials = ClientSecretCredential(tenant_id, client_id, client_secret)
 
     adf_client = DataFactoryManagementClient(credentials, subscription_id)
     pipeline_name = 'pipeline1'
@@ -43,3 +42,9 @@ def main(client_id: str, client_secret: str, tenant_id: str):
         rg_name, df_name, pipeline_run.run_id, filter_params)
     print_activity_run_details(query_response.value[0])
 
+
+if __name__ == "__main__":
+    main(environ.get('tenant_id'),
+         environ.get('subscription_id'),
+         environ.get('client_id'),
+         environ.get('client_secret'))
